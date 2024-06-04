@@ -1,9 +1,14 @@
 #!/bin/bash
 
 #install EBS driver
-helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
-helm repo update
-helm upgrade aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver --namespace kube-system
+if kubectl get deploy -n kube-system | grep -q ebs; then
+  echo "EBS driver deployment already exists in the 'kube-system' namespace."
+else
+  echo "No existing EBS driver deployment found. Proceeding with Helm update and installation."
+  helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+  helm repo update
+  helm upgrade aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver --namespace kube-system
+fi
 
 # Create db configmap
 kubectl apply -f tracey-database/postgresql-configmap.yaml
