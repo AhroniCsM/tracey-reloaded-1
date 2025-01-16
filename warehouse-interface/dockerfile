@@ -1,7 +1,7 @@
 FROM python:3.9
 
 # Set metadata labels for best practices
-LABEL authors="George Pickers,George Boddey"
+LABEL authors="Aharon Shahar"
 LABEL org.opencontainers.image.name="Tracey Reloaded - Warehouse Interface"
 LABEL org.opencontainers.image.description="Warehouse Interface for Tracey Reloaded"
 LABEL org.opencontainers.image.source="https://github.com/georgep1ckers/tracey-reloaded"
@@ -10,10 +10,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install requests \
-                opentelemetry-api \
-                opentelemetry-sdk \
-                opentelemetry-exporter-otlp \
-                opentelemetry-instrumentation-requests
+RUN pip install requests
 
 CMD ["python", "warehouse-interface.py"]

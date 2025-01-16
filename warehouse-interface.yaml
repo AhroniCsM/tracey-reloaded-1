@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: warehouse-interface
+  name: warehouse-interface-ebpf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: warehouse-interface
+      app: warehouse-interface-ebpf
   template:
     metadata:
       labels:
-        app: warehouse-interface
+        app: warehouse-interface-ebpf
     spec:
       containers:
-      - name: warehouse-interface
-        image: ghcr.io/georgep1ckers/tracey-reloaded-warehouse-interface:latest
+      - name: warehouse-interface-ebpf
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/tracey-reloaded-ebpf:warehouse-interface-ebpf-v1
         env:
           - name: KUBE_NODE_NAME
             valueFrom:

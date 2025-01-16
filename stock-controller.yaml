@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stock-controller
+  name: stock-controller-ebpf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: stock-controller
+      app: stock-controller-ebpf
   template:
     metadata:
       labels:
-        app: stock-controller
+        app: stock-controller-ebpf
     spec:
       containers:
-      - name: stock-controller
-        image: ghcr.io/georgep1ckers/tracey-reloaded-stock-controller:latest
+      - name: stock-controller-ebpf
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/tracey-reloaded-ebpf:stock-controller-ebpf
         ports:
         - containerPort: 8081
         env:

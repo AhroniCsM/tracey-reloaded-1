@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-processor
+  name: order-processor-ebpf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order-processor
+      app: order-processor-ebpf
   template:
     metadata:
       labels:
-        app: order-processor
+        app: order-processor-ebpf
     spec:
       containers:
-      - name: order-processor
-        image: ghcr.io/georgep1ckers/tracey-reloaded-order-processor:latest
+      - name: order-processor-ebpf
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/tracey-reloaded-ebpf:order-processor-ebpf
         ports:
         - containerPort: 8080
         env:
@@ -32,7 +32,7 @@ metadata:
   name: order-processor
 spec:
   selector:
-    app: order-processor
+    app: order-processor-ebpf
   ports:
   - protocol: TCP
     port: 8080
